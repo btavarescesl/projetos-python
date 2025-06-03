@@ -1,12 +1,28 @@
 import random
 
-# Variáveis para estatísticas
+# Estatísticas gerais
 total_partidas = 0
-vitorias_jogador = 0
-vitorias_computador = 0
 empates = 0
 
-# Dicionário de escolhas (movido para o escopo global)
+# Estatísticas por modo
+# Jogador x Computador
+vitorias_jogador = 0
+vitorias_computador = 0
+partidas_jogador_computador = 0
+empates_jogador_computador = 0
+
+# Computador x Computador
+vitorias_computador1 = 0
+vitorias_computador2 = 0
+partidas_computador_computador = 0
+empates_computador_computador = 0
+
+# Jogador x Jogador
+vitorias_jogador1 = 0
+vitorias_jogador2 = 0
+partidas_jogador_jogador = 0
+empates_jogador_jogador = 0
+
 escolhas = {1: "Pedra", 2: "Papel", 3: "Tesoura"}
 
 while True:
@@ -32,15 +48,15 @@ while True:
 
         computador = random.choice([1, 2, 3])
 
-        # Mostrar escolhas
         print(f"Você escolheu {escolhas[jogador]}")
         print(f"Computador escolheu {escolhas[computador]}")
 
-        # Determinar resultado
         total_partidas += 1
+        partidas_jogador_computador += 1
         if computador == jogador:
             print("Empate!")
             empates += 1
+            empates_jogador_computador += 1
         elif (computador == 1 and jogador == 2) or (computador == 2 and jogador == 3) or (computador == 3 and jogador == 1):
             print("Você venceu!")
             vitorias_jogador += 1
@@ -55,12 +71,18 @@ while True:
         print(f"Computador 1 escolheu {escolhas[computador1]}")
         print(f"Computador 2 escolheu {escolhas[computador2]}")
 
+        total_partidas += 1
+        partidas_computador_computador += 1
         if computador1 == computador2:
             print("Empate!")
+            empates += 1
+            empates_computador_computador += 1
         elif (computador1 == 1 and computador2 == 3) or (computador1 == 2 and computador2 == 1) or (computador1 == 3 and computador2 == 2):
             print("Computador 1 venceu!")
+            vitorias_computador1 += 1
         else:
             print("Computador 2 venceu!")
+            vitorias_computador2 += 1
 
     elif selecao_modo == 3:
         print("Modo Jogador X Jogador")
@@ -78,23 +100,41 @@ while True:
         print(f"Jogador 1 escolheu {escolhas[jogador1]}")
         print(f"Jogador 2 escolheu {escolhas[jogador2]}")
 
+        total_partidas += 1
+        partidas_jogador_jogador += 1
         if jogador1 == jogador2:
             print("Empate!")
+            empates += 1
+            empates_jogador_jogador += 1
         elif (jogador1 == 1 and jogador2 == 3) or (jogador1 == 2 and jogador2 == 1) or (jogador1 == 3 and jogador2 == 2):
             print("Jogador 1 venceu!")
+            vitorias_jogador1 += 1
         else:
             print("Jogador 2 venceu!")
+            vitorias_jogador2 += 1
 
     elif selecao_modo == 4:
-        if total_partidas == 0:
-            print("Nenhuma partida foi realizada ainda.")
-        else:
-            percentual_vitorias = (vitorias_jogador / total_partidas) * 100
-            print(f"Total de partidas: {total_partidas}")
-            print(f"Vitórias do jogador: {vitorias_jogador}")
-            print(f"Vitórias do computador: {vitorias_computador}")
-            print(f"Empates: {empates}")
-            print(f"Percentual de vitórias do jogador: {percentual_vitorias:.2f}%")
+        print("\n=== Estatísticas Gerais ===")
+        print(f"Total de partidas: {total_partidas}")
+        print(f"Empates totais: {empates}")
+
+        print("\n--- Computador X Jogador ---")
+        print(f"Partidas: {partidas_jogador_computador}")
+        print(f"Vitórias do jogador: {vitorias_jogador}")
+        print(f"Vitórias do computador: {vitorias_computador}")
+        print(f"Empates: {empates_jogador_computador}")
+
+        print("\n--- Computador X Computador ---")
+        print(f"Partidas: {partidas_computador_computador}")
+        print(f"Vitórias do computador 1: {vitorias_computador1}")
+        print(f"Vitórias do computador 2: {vitorias_computador2}")
+        print(f"Empates: {empates_computador_computador}")
+
+        print("\n--- Jogador X Jogador ---")
+        print(f"Partidas: {partidas_jogador_jogador}")
+        print(f"Vitórias do jogador 1: {vitorias_jogador1}")
+        print(f"Vitórias do jogador 2: {vitorias_jogador2}")
+        print(f"Empates: {empates_jogador_jogador}\n")
 
     elif selecao_modo == 5:
         print("Você saiu do jogo.")

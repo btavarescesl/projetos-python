@@ -1,0 +1,104 @@
+import random
+
+# Variáveis para estatísticas
+total_partidas = 0
+vitorias_jogador = 0
+vitorias_computador = 0
+empates = 0
+
+# Dicionário de escolhas (movido para o escopo global)
+escolhas = {1: "Pedra", 2: "Papel", 3: "Tesoura"}
+
+while True:
+    print("Bem-Vindo ao jogo de Jokenpô, escolha o modo de jogo")
+    print("[1] Computador X Jogador")
+    print("[2] Computador X Computador")
+    print("[3] Jogador X Jogador")
+    print("[4] Exibir Estatísticas")
+    print("[5] Sair do Jogo")
+    selecao_modo = int(input("Selecione o modo de jogo: "))
+
+    if selecao_modo == 1:
+        print("Jogo de Pedra, Papel e Tesoura")
+        print("Escolha uma opção:")
+        print("[1] Pedra")
+        print("[2] Papel")
+        print("[3] Tesoura")
+
+        jogador = int(input("Qual é a sua jogada? "))
+        while jogador not in [1, 2, 3]:
+            print("Opção inválida, tente novamente.")
+            jogador = int(input("Qual é a sua jogada? "))
+
+        computador = random.choice([1, 2, 3])
+
+        # Mostrar escolhas
+        print(f"Você escolheu {escolhas[jogador]}")
+        print(f"Computador escolheu {escolhas[computador]}")
+
+        # Determinar resultado
+        total_partidas += 1
+        if computador == jogador:
+            print("Empate!")
+            empates += 1
+        elif (computador == 1 and jogador == 2) or (computador == 2 and jogador == 3) or (computador == 3 and jogador == 1):
+            print("Você venceu!")
+            vitorias_jogador += 1
+        else:
+            print("Computador venceu!")
+            vitorias_computador += 1
+
+    elif selecao_modo == 2:
+        print("Modo Computador X Computador")
+        computador1 = random.choice([1, 2, 3])
+        computador2 = random.choice([1, 2, 3])
+        print(f"Computador 1 escolheu {escolhas[computador1]}")
+        print(f"Computador 2 escolheu {escolhas[computador2]}")
+
+        if computador1 == computador2:
+            print("Empate!")
+        elif (computador1 == 1 and computador2 == 3) or (computador1 == 2 and computador2 == 1) or (computador1 == 3 and computador2 == 2):
+            print("Computador 1 venceu!")
+        else:
+            print("Computador 2 venceu!")
+
+    elif selecao_modo == 3:
+        print("Modo Jogador X Jogador")
+        print("[1] Pedra")
+        print("[2] Papel")
+        print("[3] Tesoura")
+        jogador1 = int(input("Jogador 1, escolha sua jogada: "))
+        jogador2 = int(input("Jogador 2, escolha sua jogada: "))
+
+        while jogador1 not in [1, 2, 3] or jogador2 not in [1, 2, 3]:
+            print("Opção inválida, tente novamente.")
+            jogador1 = int(input("Jogador 1, escolha sua jogada: "))
+            jogador2 = int(input("Jogador 2, escolha sua jogada: "))
+
+        print(f"Jogador 1 escolheu {escolhas[jogador1]}")
+        print(f"Jogador 2 escolheu {escolhas[jogador2]}")
+
+        if jogador1 == jogador2:
+            print("Empate!")
+        elif (jogador1 == 1 and jogador2 == 3) or (jogador1 == 2 and jogador2 == 1) or (jogador1 == 3 and jogador2 == 2):
+            print("Jogador 1 venceu!")
+        else:
+            print("Jogador 2 venceu!")
+
+    elif selecao_modo == 4:
+        if total_partidas == 0:
+            print("Nenhuma partida foi realizada ainda.")
+        else:
+            percentual_vitorias = (vitorias_jogador / total_partidas) * 100
+            print(f"Total de partidas: {total_partidas}")
+            print(f"Vitórias do jogador: {vitorias_jogador}")
+            print(f"Vitórias do computador: {vitorias_computador}")
+            print(f"Empates: {empates}")
+            print(f"Percentual de vitórias do jogador: {percentual_vitorias:.2f}%")
+
+    elif selecao_modo == 5:
+        print("Você saiu do jogo.")
+        break
+
+    else:
+        print("Opção inválida, tente novamente.")
